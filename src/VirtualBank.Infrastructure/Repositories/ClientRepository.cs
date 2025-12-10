@@ -1,81 +1,33 @@
-using VirtualBank.Infrastructure.Services;
+using Dapper;
+using Microsoft.Data.Sqlite;
 
-namespace VirtualBank.Infrastructure.Repositories
-{
-    class ClientRepository: IRepository<ClientDto>
+using VirtualBank.Domain.Interfaces;
+using VirtualBank.Domain.Entities;
+
+namespace VirtualBank.Infrastructure.Repositories;
+class ClientRepository : IClientRepository
     {
-        private readonly SqliteService _db = new SqliteService();
-        public void Create(ClientModel client)
+        public void Create(Client client)
         {
-            using var conn = _db.Connection();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = "INSERT INTO CLIENTS (CPF, NAME, AGE, PASSWORD) VALUES (@cpf, @password)";
-            cmd.Parameters.AddWithValue("@cpf", client.Cpf);
-            cmd.Parameters.AddWithValue("@password", client.Password);
-            cmd.ExecuteNonQuery();
-
-            Console.WriteLine($"Clitente com CPF: {client.Cpf} foi cadastrado com sucesso!");
+           using var conn = new SqliteConnection("Filename=:memory:");
         }
-
-        public List<ClientModel> Get()
+        
+        public List<Client> Get()
         {   
-            var clients = new List<ClientModel>();
-
-            using var conn = _db.Connection();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT CPF, NAME, PASSWORD FROM CLIENTS";
-            var reader = cmd.ExecuteReader();
-            
-            while(reader.Read())
-            {
-                clients.Add( 
-                    new ClientModel
-                    {
-                        Cpf = reader.GetString(0),
-                        Name = reader.GetString(1),
-                        Password = reader.GetString(2)
-                    }
-                );
-            }
-
+            var clients = new List<Client>();
+        
             return clients;
         }
-        public ClientModel? GetOne(string cpf)
+        public Client? GetOne(string cpf)
         {
-            using var conn = _db.Connection();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT CPF, PASSWORD FROM CLIENTS WHERE CPF = @cpf";
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            var reader = cmd.ExecuteReader();
-            if(reader.Read())
-            {
-                return new ClientModel
-                {
-                    Cpf = reader.GetString(0),
-                    Name = reader.GetString(1),
-                    Password = reader.GetString(2)
-                };
-            }
-            
             return null;
         }
-        public void Update(ClientModel client)
+        public void Update(Client client)
         {
-            using var conn = _db.Connection();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = "UPDATE CLIENTS SET PASSWORD = @password WHERE CPF = @cpf";
-            cmd.Parameters.AddWithValue("@cpf", client.Cpf);
-            cmd.Parameters.AddWithValue("@password", client.Password);
-            cmd.ExecuteNonQuery();
+            
         }
         public void Delete(string cpf)
         {
-            using var conn = _db.Connection();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM CLIENTS WHERE CPF = @cpf";
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.ExecuteNonQuery();
             
         }
     }
-}

@@ -1,0 +1,11 @@
+﻿PRAGMA foreign_keys = ON;
+CREATE TABLE IF NOT EXISTS Transactions (
+    Id TEXT PRIMARY KEY,
+    Amount DECIMAL NOT NULL,
+    Currency TEXT NOT NULL,
+    DebtorId TEXT NOT NULL,
+    ReceiverId TEXT NOT NULL,
+    Date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (DebtorId) REFERENCES Accounts(Id),
+    FOREIGN KEY (ReceiverId) REFERENCES Accounts(Id)
+);

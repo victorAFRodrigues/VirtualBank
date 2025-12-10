@@ -1,6 +1,7 @@
-﻿namespace VirtualBank.Domain.Interfaces;
+﻿using VirtualBank.Domain.Entities;
 
-public interface IClientRepository
+namespace VirtualBank.Domain.Interfaces;
+public interface IClientRepository : IRepository<Client, string>
 {
 
 }
