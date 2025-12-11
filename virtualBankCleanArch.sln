@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBank.E2ETests", "tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBank.Application", "src\VirtualBank.Application\VirtualBank.Application.csproj", "{D2A79968-F38B-45BA-9671-8F859D599C43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualBank.Presentation.Console", "src\VirtualBank.Presentation.Console\VirtualBank.Presentation.Console.csproj", "{12758A6A-0D82-4B4C-93D5-6EAE515441B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,7 @@ Global
 		{ADF12046-2139-4D96-9B70-D77F07BF426F} = {2D4075D2-EE0A-433D-97D6-E3F44E364FC5}
 		{9A91BC9D-3F7A-4AFD-8EF7-AD6DDFB73899} = {2D4075D2-EE0A-433D-97D6-E3F44E364FC5}
 		{D2A79968-F38B-45BA-9671-8F859D599C43} = {5834CAE9-BC58-40F3-84F5-8E6D91E28DC8}
+		{12758A6A-0D82-4B4C-93D5-6EAE515441B8} = {5834CAE9-BC58-40F3-84F5-8E6D91E28DC8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{39BC7265-013E-4CE5-AADE-426EFF22219D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,5 +64,9 @@ Global
 		{D2A79968-F38B-45BA-9671-8F859D599C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2A79968-F38B-45BA-9671-8F859D599C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2A79968-F38B-45BA-9671-8F859D599C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12758A6A-0D82-4B4C-93D5-6EAE515441B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12758A6A-0D82-4B4C-93D5-6EAE515441B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12758A6A-0D82-4B4C-93D5-6EAE515441B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12758A6A-0D82-4B4C-93D5-6EAE515441B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -4,13 +4,12 @@ namespace VirtualBank.Infrastructure.Services;
 
 public class MigrationService
 {
-    private const string ConnectionString = "Data Source=./Database/data.db";
-    private const string MigrationFolder = "./Migrations";
+    private static readonly string MigrationFolder = Path.Combine(AppContext.BaseDirectory, "./Migrations");
     private readonly SqliteService _sqliteService = new();
     
     public void RunMigrations()
     {
-        Directory.CreateDirectory("./Database");
+        Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Database"));
         
         using var conn = _sqliteService.Connection();
         conn.Open();

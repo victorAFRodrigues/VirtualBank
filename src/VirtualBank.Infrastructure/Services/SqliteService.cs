@@ -5,7 +5,7 @@ namespace VirtualBank.Infrastructure.Services;
 
 public class SqliteService
 {   
-    private const string ConnectionString = "Data Source=./Database/data.db";
+    private const string ConnectionString = "Data Source=../database/data.db";
     public IDbConnection Connection()
     {
         return new SqliteConnection(ConnectionString);
