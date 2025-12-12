@@ -4,13 +4,17 @@ namespace VirtualBank.Infrastructure.Services;
 
 public class MigrationService
 {
-    private static readonly string MigrationFolder = Path.Combine(AppContext.BaseDirectory, "./Migrations");
-    private readonly SqliteService _sqliteService = new();
+    private readonly string _migrationFolder;
+    private readonly SqliteService _sqliteService; 
+
+    public MigrationService(string migrationFolder, string connectionString)
+    {
+        _migrationFolder = migrationFolder;
+        _sqliteService = new SqliteService(connectionString);
+    }
     
     public void RunMigrations()
     {
-        Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Database"));
-        
         using var conn = _sqliteService.Connection();
         conn.Open();
         
@@ -24,7 +28,7 @@ public class MigrationService
 
         var applied = conn.Query<string>("SELECT FileName FROM __MIGRATIONS").ToHashSet();
 
-        foreach (var file in Directory.GetFiles(MigrationFolder, "*.sql"))
+        foreach (var file in Directory.GetFiles(_migrationFolder, "*.sql"))
         {
             var fileName = Path.GetFileName(file);
 
@@ -42,9 +46,7 @@ public class MigrationService
                 new { file = fileName }
             );
 
-            Console.WriteLine($"✓ Migration applied: {fileName}");
+            Console.WriteLine($"Migration applied: {fileName}");
         }
     }
 }
-
-

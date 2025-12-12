@@ -4,11 +4,13 @@ using System.Data;
 namespace VirtualBank.Infrastructure.Services;
 
 public class SqliteService
-{   
-    private const string ConnectionString = "Data Source=../database/data.db";
-    public IDbConnection Connection()
-    {
-        return new SqliteConnection(ConnectionString);
+{
+    private readonly string _dbPath;
 
+    public SqliteService(string dbPath)
+    {
+        _dbPath = dbPath;
     }
+
+    public IDbConnection Connection() => new SqliteConnection($"Data Source={_dbPath}");
 }
